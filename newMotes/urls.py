@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
+from rest_framework.authtoken import views as authtoken_views
 from newMotes.apiMotes import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -34,5 +37,6 @@ router.register(r'evento', views.EventoViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-]
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-auth/token', authtoken_views.obtain_auth_token)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

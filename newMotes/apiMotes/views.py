@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from django.contrib.auth.models import User, Group
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 from rest_framework import viewsets
 from rest_framework import permissions
 from newMotes.apiMotes.serializers import *
@@ -13,7 +14,10 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
+    
+    
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -22,7 +26,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
 
 class SequenzaRiposiViewSet(viewsets.ModelViewSet):
     """
@@ -30,15 +35,17 @@ class SequenzaRiposiViewSet(viewsets.ModelViewSet):
     """
     queryset = SequenzaRiposi.objects.all()
     serializer_class = SequenzaRiposiSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
 
 class LavoratoreViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Lavoratore to be viewed or edited.
     """
     queryset = Lavoratore.objects.all()
-    serializer_class = LavoratoreSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = LavoratoreSerializer    
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
 
 class LineaViewSet(viewsets.ModelViewSet):
     """
@@ -46,7 +53,8 @@ class LineaViewSet(viewsets.ModelViewSet):
     """
     queryset = Linea.objects.all()
     serializer_class = LineaSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
 
 class TurnoViewSet(viewsets.ModelViewSet):
     """
@@ -54,7 +62,8 @@ class TurnoViewSet(viewsets.ModelViewSet):
     """
     queryset = Turno.objects.all()
     serializer_class = TurnoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
 
 class MatriceViewSet(viewsets.ModelViewSet):
     """
@@ -62,7 +71,8 @@ class MatriceViewSet(viewsets.ModelViewSet):
     """
     queryset = Matrice.objects.all()
     serializer_class = MatriceSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
 
 class EventoViewSet(viewsets.ModelViewSet):
     """
@@ -70,4 +80,5 @@ class EventoViewSet(viewsets.ModelViewSet):
     """
     queryset = Evento.objects.all()
     serializer_class = EventoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.DjangoModelPermissions]
+    #permission_classes = [permissions.IsAuthenticated]
