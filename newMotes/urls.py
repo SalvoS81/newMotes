@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from rest_framework.authtoken import views as authtoken_views
+#from rest_framework.authtoken import views as authtoken_views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 from newMotes.apiMotes import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -38,5 +42,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-auth/token', authtoken_views.obtain_auth_token)
+    #path('api-auth/token', authtoken_views.obtain_auth_token),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
